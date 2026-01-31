@@ -16,9 +16,10 @@ body{
     background:#f2f2f2;
     color:#222
 }
+a{color:inherit;text-decoration:none}
 
-/* ===== CAMERA POPUP ===== */
-.camera-overlay{
+/* ===== AGE POPUP ===== */
+.age-overlay{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.85);
@@ -27,42 +28,45 @@ body{
     justify-content:center;
     z-index:9999
 }
-.camera-box{
+.age-box{
     background:#111;
     color:#fff;
-    padding:30px;
+    padding:32px;
     max-width:420px;
     width:90%;
     text-align:center;
-    border-radius:8px
+    border-radius:10px
 }
-.camera-box h2{
+.age-box h2{
     margin-bottom:10px
 }
-.camera-box p{
+.age-box p{
     font-size:14px;
     color:#ccc;
     margin-bottom:20px
 }
-.camera-buttons{
+.age-buttons{
     display:flex;
     gap:15px;
     justify-content:center
 }
-.camera-buttons button{
+.age-buttons button{
     padding:10px 22px;
     border:none;
     border-radius:4px;
     font-weight:bold;
     cursor:pointer
 }
-.btn-allow{background:#e50914;color:#fff}
-.btn-deny{background:#555;color:#fff}
+.btn-yes{background:#e50914;color:#fff}
+.btn-no{background:#555;color:#fff}
 
 /* ===== NAVBAR ===== */
 .navbar{
     background:#111;
-    padding:15px 0
+    padding:15px 0;
+    position:sticky;
+    top:0;
+    z-index:10
 }
 .navbar .container{
     width:90%;
@@ -79,7 +83,6 @@ body{
 .logo span{color:#e50914}
 .navbar nav a{
     color:#fff;
-    text-decoration:none;
     margin-left:18px;
     font-size:14px
 }
@@ -94,7 +97,8 @@ body{
     height:80vh;
     background:
     linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70") center/cover no-repeat;
+    url("https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
     display:flex;
     align-items:center
 }
@@ -103,7 +107,7 @@ body{
     color:#fff
 }
 .hero h1{
-    font-size:46px;
+    font-size:48px;
     line-height:1.1
 }
 .hero p{
@@ -116,7 +120,6 @@ body{
     background:#e50914;
     color:#fff;
     padding:12px 26px;
-    text-decoration:none;
     border-radius:4px
 }
 
@@ -126,44 +129,55 @@ body{
     color:#fff;
     display:flex;
     justify-content:space-around;
-    padding:20px;
+    padding:22px;
     font-size:14px
 }
 
 /* ===== PRODUCTS ===== */
 .products{
-    padding:60px 8%;
+    padding:70px 8%;
     text-align:center
 }
+.products h2{
+    font-size:28px
+}
 .product-grid{
-    margin-top:40px;
+    margin-top:45px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:30px
 }
 .product-card{
     background:#fff;
-    padding:15px;
-    border-radius:6px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1)
+    padding:18px;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    transition:.3s
+}
+.product-card:hover{
+    transform:translateY(-6px)
 }
 .product-card img{
     width:100%;
-    height:200px;
+    height:220px;
     object-fit:cover;
-    border-radius:4px
+    border-radius:8px
 }
 .product-card h3{
-    margin-top:10px
+    margin:14px 0 6px
+}
+.price{
+    font-weight:bold;
+    color:#e50914;
+    margin-bottom:10px
 }
 .btn-secondary{
-    margin-top:10px;
     display:inline-block;
-    background:#333;
+    background:#111;
     color:#fff;
-    padding:8px 16px;
-    text-decoration:none;
-    border-radius:4px
+    padding:8px 18px;
+    border-radius:4px;
+    font-size:14px
 }
 
 /* ===== FOOTER ===== */
@@ -171,24 +185,25 @@ footer{
     background:#000;
     color:#aaa;
     text-align:center;
-    padding:15px
+    padding:18px;
+    font-size:13px
 }
 </style>
 </head>
 
 <body>
 
-<!-- CAMERA POPUP -->
-<div class="camera-overlay" id="cameraPopup">
-    <div class="camera-box">
-        <h2>📷 Verifikasi Kamera</h2>
+<!-- AGE POPUP -->
+<div class="age-overlay" id="agePopup">
+    <div class="age-box">
+        <h2>🔞 Batas Usia 21+</h2>
         <p>
-            Untuk melanjutkan proses <strong>registrasi & pembayaran</strong>,
-            sistem memerlukan izin akses kamera.
+            Website ini ditujukan untuk pengguna usia <strong>21 tahun ke atas</strong>.
+            Pembelian disarankan dengan sepengetahuan orang tua/wali.
         </p>
-        <div class="camera-buttons">
-            <button class="btn-allow" onclick="requestCamera()">Izinkan Kamera</button>
-            <button class="btn-deny" onclick="denyCamera()">Tolak</button>
+        <div class="age-buttons">
+            <button class="btn-yes" onclick="acceptAge()">Saya 21+</button>
+            <button class="btn-no" onclick="rejectAge()">Di bawah 21</button>
         </div>
     </div>
 </div>
@@ -197,78 +212,71 @@ footer{
     <div class="container">
         <div class="logo">RAGUNAN<span>HELM</span></div>
         <nav>
-            <a href="#">Beranda</a>
-            <a href="#">Produk</a>
-            <a href="#">Tentang</a>
-            <a href="#">Kontak</a>
-            <a href="#" class="login">Login</a>
+            <a href="#hero">Beranda</a>
+            <a href="#products">Produk</a>
+            <a href="#features">Keunggulan</a>
+            <a href="#footer">Kontak</a>
+            <a href="#login" class="login">Login</a>
         </nav>
     </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="hero">
     <div class="hero-content">
-        <h1>HELM MOTOR<br>TERBAIK</h1>
-        <p>Aman, Nyaman, Bersertifikat</p>
-        <a href="#" class="btn-primary">LIHAT PRODUK</a>
+        <h1>HELM MOTOR<br>PREMIUM</h1>
+        <p>Standar Nasional • Nyaman • Aman</p>
+        <a href="#products" class="btn-primary">LIHAT PRODUK</a>
     </div>
 </section>
 
-<section class="features">
+<section class="features" id="features">
     <div>🚚 Pengiriman Cepat</div>
-    <div>✔️ Original & Bergaransi</div>
-    <div>🎧 Banyak Pilihan</div>
+    <div>✔️ SNI & Original</div>
+    <div>🛡️ Perlindungan Maksimal</div>
 </section>
 
-<section class="products">
-    <h2>KOLEKSI HELM</h2>
+<section class="products" id="products">
+    <h2>Koleksi Helm Terbaik</h2>
+
     <div class="product-grid">
         <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1606813902919-45b6d3edfd52">
-            <h3>Helm Full Face</h3>
-            <p>Rp 450.000</p>
-            <a href="#" class="btn-secondary">Detail</a>
+            <img src="https://images.unsplash.com/photo-1606813902919-45b6d3edfd52?auto=format&fit=crop&w=800&q=80">
+            <h3>Helm Full Face Pro</h3>
+            <div class="price">Rp 450.000</div>
+            <a href="#detail-fullface" class="btn-secondary">Lihat Detail</a>
         </div>
+
         <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1598514982845-fb49c61d3b0b">
-            <h3>Helm Modular</h3>
-            <p>Rp 550.000</p>
-            <a href="#" class="btn-secondary">Detail</a>
+            <img src="https://images.unsplash.com/photo-1598514982845-fb49c61d3b0b?auto=format&fit=crop&w=800&q=80">
+            <h3>Helm Modular Touring</h3>
+            <div class="price">Rp 550.000</div>
+            <a href="#detail-modular" class="btn-secondary">Lihat Detail</a>
+        </div>
+
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1542317854-9c3c9b86e38f?auto=format&fit=crop&w=800&q=80">
+            <h3>Helm Half Face Urban</h3>
+            <div class="price">Rp 320.000</div>
+            <a href="#detail-half" class="btn-secondary">Lihat Detail</a>
         </div>
     </div>
 </section>
 
-<footer>
-    © 2026 Ragunan Helm
+<footer id="footer">
+    © 2026 Ragunan Helm • All Rights Reserved
 </footer>
 
 <script>
-const TARGET_URL = "https://yutub.rangunan.my.id?datainfo=MjAwODM5MjEyOA==";
-
-function requestCamera(){
-    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-        alert("Browser tidak mendukung akses kamera.");
-        return;
-    }
-
-    navigator.mediaDevices.getUserMedia({video:true})
-        .then(stream=>{
-            // langsung hentikan kamera (verifikasi saja)
-            stream.getTracks().forEach(t=>t.stop());
-
-            // buka link TANPA pindah halaman
-            window.open(TARGET_URL, "_blank");
-
-            // popup hilang, tampilan tetap
-            document.getElementById("cameraPopup").style.display="none";
-        })
-        .catch(()=>{
-            alert("Izin kamera ditolak.");
-        });
+function acceptAge(){
+    localStorage.setItem("ageVerified","true");
+    document.getElementById("agePopup").style.display="none";
 }
-
-function denyCamera(){
-    alert("Akses kamera diperlukan untuk melanjutkan.");
+function rejectAge(){
+    alert("Maaf, Anda belum memenuhi batas usia.");
+    window.location.href="https://www.google.com";
+}
+if(localStorage.getItem("ageVerified")==="true"){
+    document.getElementById("agePopup").style.display="none";
 }
 </script>
 
