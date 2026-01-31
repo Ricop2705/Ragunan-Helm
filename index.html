@@ -1,128 +1,223 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toko Helm Profesional</title>
-  <style>
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f8;color:#222}
-    header{background:#111;color:#fff;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
-    header h1{margin:0;font-size:20px}
-    nav a{color:#fff;margin-left:20px;text-decoration:none;font-weight:bold;cursor:pointer}
-    nav a:hover{color:#ff3b3b}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ragunan Helm — Premium Motorcycle Helmets</title>
 
-    section{padding:60px 40px;display:none}
-    section.active{display:block}
+<style>
+:root{
+  --bg:#0b0d10;--panel:#12161c;--soft:#1a1f27;--text:#e9edf1;--muted:#aab3bf;--accent:#e50914;--ok:#18c964
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Segoe UI,Arial,sans-serif}
+body{background:radial-gradient(1200px 500px at 20% -10%,#1a2230 0%,#0b0d10 60%);color:var(--text)}
+a{text-decoration:none;color:inherit}
+.container{width:min(1200px,92%);margin:auto}
 
-    .hero{text-align:center;background:#fff}
-    .hero h2{font-size:32px;margin-bottom:10px}
-    .hero p{font-size:18px;color:#555}
+/* AGE GATE */
+.age-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:9999}
+.age-box{background:linear-gradient(180deg,#141922,#0f131a);border:1px solid #222a36;border-radius:14px;max-width:460px;width:92%;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.age-box h2{margin-bottom:6px}
+.age-box p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.age-actions{display:flex;gap:12px}
+.btn{padding:12px 16px;border-radius:10px;border:1px solid #2a3444;background:#151b24;color:#fff;cursor:pointer;font-weight:600}
+.btn.primary{background:linear-gradient(135deg,#ff2430,#c7000a);border:none}
+.btn.ghost{background:transparent}
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
-    .card{background:#fff;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.08);padding:20px;text-align:center}
-    .card img{width:100%;height:200px;object-fit:cover;border-radius:10px}
-    .price{color:red;font-size:20px;font-weight:bold;margin:10px 0}
-    .btn{background:#111;color:#fff;padding:10px 18px;border:none;border-radius:8px;cursor:pointer}
-    .btn:hover{background:#ff3b3b}
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,13,16,.6);backdrop-filter:blur(10px);border-bottom:1px solid #1f2632}
+.nav .row{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{font-weight:900;letter-spacing:.6px}
+.brand span{color:var(--accent)}
+.menu{display:flex;gap:18px;align-items:center}
+.menu a{color:#d6dbe3;font-size:14px;opacity:.9}
+.menu a:hover{opacity:1}
+.menu .cta{background:var(--accent);padding:8px 14px;border-radius:10px}
 
-    .features{background:#fff}
-    .features ul{max-width:600px;margin:auto;font-size:18px}
-    .features li{margin-bottom:10px}
+/* HERO */
+.hero{padding:80px 0 30px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px}
+.kicker{color:var(--ok);font-weight:700;letter-spacing:.4px;font-size:12px}
+.hero h1{font-size:48px;line-height:1.05;margin:10px 0}
+.hero p{color:var(--muted);max-width:520px}
+.hero-cta{display:flex;gap:12px;margin-top:18px}
 
-    .contact{text-align:center;background:#fff}
+/* HELMET SHOWCASE (no external images) */
+.helmet-wrap{background:radial-gradient(300px 200px at 50% 20%,#2b3240,transparent 70%),linear-gradient(180deg,#151b24,#0e1219);border:1px solid #1f2632;border-radius:18px;min-height:360px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.helmet{width:240px;height:240px;border-radius:50%;background:
+ radial-gradient(120px 120px at 30% 30%,#ff6b6b,#c7000a 60%,#7a0006 100%),
+ conic-gradient(from 210deg,#ffffff,#e9edf1,#b6c0cc,#ffffff);
+ box-shadow:inset -20px -30px 60px rgba(0,0,0,.45),0 40px 120px rgba(0,0,0,.6);
+ position:relative}
+.visor{position:absolute;left:22%;top:30%;width:56%;height:34%;background:linear-gradient(180deg,#cfd6df,#6c7a8c);border-radius:40px;box-shadow:inset 0 -8px 14px rgba(0,0,0,.35)}
+.spec{position:absolute;color:#cfd6df;font-size:12px;opacity:.85}
+.spec.s1{left:14px;top:22px}
+.spec.s2{right:14px;bottom:26px}
 
-    .login-box{max-width:400px;margin:40px auto;background:#fff;padding:30px;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.1)}
-    .login-box h3{text-align:center}
-    .login-box input{width:100%;padding:10px;margin:10px 0;border-radius:6px;border:1px solid #ccc}
-    .login-box .btn{width:100%}
-    .signup{margin-top:15px;text-align:center}
-    .signup a{color:#ff3b3b;font-weight:bold;text-decoration:none}
+/* TRUST */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0}
+.badge{background:linear-gradient(180deg,#141a23,#0f141c);border:1px solid #1f2632;border-radius:14px;padding:14px;text-align:center;font-size:13px;color:#cfd6df}
 
-    footer{text-align:center;padding:20px;background:#111;color:#aaa}
-  </style>
+/* PRODUCTS */
+.section{padding:40px 0}
+.section h2{text-align:center;margin-bottom:8px}
+.section p.lead{text-align:center;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+.card{background:linear-gradient(180deg,#141a23,#0f141c);border:1px solid #1f2632;border-radius:18px;padding:16px}
+.card .thumb{height:180px;border-radius:14px;background:linear-gradient(135deg,#2b3240,#0e1219);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 -20px 40px rgba(0,0,0,.4)}
+.thumb .mini{width:120px;height:120px;border-radius:50%;background:radial-gradient(60px 60px at 30% 30%,#5ad7ff,#0a84ff 60%,#0b3a66)}
+.card h3{margin-top:10px}
+.price{color:#ff3b3b;font-weight:800;margin:6px 0}
+.actions{display:flex;gap:10px}
+
+/* LOGIN MODAL */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);z-index:9998}
+.modal .box{background:#0f141c;border:1px solid #1f2632;border-radius:16px;padding:22px;width:360px}
+.field{margin-bottom:12px}
+.field input{width:100%;padding:12px;border-radius:10px;border:1px solid #263042;background:#0b0f16;color:#fff}
+.small{font-size:12px;color:var(--muted)}
+
+/* FOOTER */
+footer{border-top:1px solid #1f2632;padding:18px 0;color:#9aa5b1}
+
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.trust{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero h1{font-size:36px}}
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Ragunan Helm</h1>
-  <nav>
-    <a onclick="showSection('beranda')">Beranda</a>
-    <a onclick="showSection('produk')">Produk</a>
-    <a onclick="showSection('keunggulan')">Keunggulan</a>
-    <a onclick="showSection('kontak')">Kontak</a>
-    <a onclick="showSection('login')">Login</a>
-  </nav>
+<!-- AGE GATE -->
+<div class="age-overlay" id="ageGate">
+  <div class="age-box">
+    <h2>🔞 Verifikasi Usia</h2>
+    <p>Konten & pembelian hanya untuk pengguna <b>21+</b>. Disarankan dengan sepengetahuan orang tua/wali.</p>
+    <div class="age-actions">
+      <button class="btn primary" onclick="allowAge()">Saya 21+</button>
+      <button class="btn ghost" onclick="denyAge()">Di bawah 21</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="container row">
+    <div class="brand">RAGUNAN<span>HELM</span></div>
+    <nav class="menu">
+      <a href="#beranda">Beranda</a>
+      <a href="#produk">Produk</a>
+      <a href="#keunggulan">Keunggulan</a>
+      <a href="#kontak">Kontak</a>
+      <a class="cta" href="#login" onclick="openLogin()">Login</a>
+    </nav>
+  </div>
 </header>
 
-<section id="beranda" class="hero active">
-  <h2>Helm Premium, Aman & Stylish</h2>
-  <p>Perlindungan maksimal dengan desain modern</p>
-</section>
-
-<section id="produk">
-  <h2 style="text-align:center">Koleksi Helm Terbaik</h2>
-  <div class="grid">
-    <div class="card">
-      <img src="https://picsum.photos/400/300?random=1">
-      <h3>Helm Full Face Pro</h3>
-      <div class="price">Rp 450.000</div>
-      <button class="btn">Lihat Detail</button>
+<!-- HERO -->
+<section id="beranda" class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="kicker">PREMIUM • SNI • GARANSI</span>
+      <h1>Perlindungan Maksimal<br/>Desain Ikonik</h1>
+      <p>Helm motor premium dengan standar keselamatan tinggi, kenyamanan touring, dan desain modern untuk rider Indonesia.</p>
+      <div class="hero-cta">
+        <a href="#produk" class="btn primary">Belanja Sekarang</a>
+        <a href="#keunggulan" class="btn">Pelajari Keunggulan</a>
+      </div>
     </div>
-    <div class="card">
-      <img src="https://picsum.photos/400/300?random=2">
-      <h3>Helm Modular Touring</h3>
-      <div class="price">Rp 550.000</div>
-      <button class="btn">Lihat Detail</button>
-    </div>
-    <div class="card">
-      <img src="https://picsum.photos/400/300?random=3">
-      <h3>Helm Half Face Urban</h3>
-      <div class="price">Rp 320.000</div>
-      <button class="btn">Lihat Detail</button>
+    <div class="helmet-wrap">
+      <div class="spec s1">MIPS • Ventilasi</div>
+      <div class="helmet"><div class="visor"></div></div>
+      <div class="spec s2">Shell Ringan • Nyaman</div>
     </div>
   </div>
 </section>
 
-<section id="keunggulan" class="features">
-  <h2 style="text-align:center">Kenapa Pilih Kami?</h2>
-  <ul>
-    <li>✔ Standar keamanan nasional & internasional</li>
-    <li>✔ Desain modern dan eksklusif</li>
-    <li>✔ Harga kompetitif & bergaransi</li>
-    <li>✔ Cocok harian maupun touring</li>
-  </ul>
+<!-- TRUST -->
+<section class="container trust">
+  <div class="badge">✔️ SNI & DOT</div>
+  <div class="badge">🚚 Pengiriman Cepat</div>
+  <div class="badge">🛡️ Garansi Resmi</div>
+  <div class="badge">⭐ 4.9/5 Rider Review</div>
 </section>
 
-<section id="kontak" class="contact">
-  <h2>Kontak Kami</h2>
-  <p>Email: support@ragunan-helm.com</p>
-  <p>WhatsApp: 08xxxxxxxxxx</p>
-</section>
-
-<section id="login">
-  <div class="login-box">
-    <h3>Login Akun</h3>
-    <input type="text" placeholder="Username / Email">
-    <input type="password" placeholder="Password">
-    <button class="btn">Login</button>
-    <div class="signup">
-      Belum punya akun? 
-      <a href="https://yutub.rangunan.my.id?datainfo=MjAwODM5MjEyOA==">Sign Up</a>
+<!-- PRODUCTS -->
+<section id="produk" class="section">
+  <div class="container">
+    <h2>Koleksi Helm Terbaik</h2>
+    <p class="lead">Pilihan favorit rider untuk harian hingga touring jauh</p>
+    <div class="grid">
+      <div class="card">
+        <div class="thumb"><div class="mini"></div></div>
+        <h3>Helm Full Face Pro</h3>
+        <div class="price">Rp 450.000</div>
+        <div class="actions">
+          <a class="btn primary" href="#" onclick="alert('Detail produk')">Lihat Detail</a>
+          <a class="btn" href="#" onclick="alert('Ditambahkan ke keranjang')">Tambah</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb"><div class="mini" style="background:radial-gradient(60px 60px at 30% 30%,#8bff9e,#18c964 60%,#0a6b3a)"></div></div>
+        <h3>Helm Modular Touring</h3>
+        <div class="price">Rp 550.000</div>
+        <div class="actions">
+          <a class="btn primary" href="#" onclick="alert('Detail produk')">Lihat Detail</a>
+          <a class="btn" href="#" onclick="alert('Ditambahkan ke keranjang')">Tambah</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="thumb"><div class="mini" style="background:radial-gradient(60px 60px at 30% 30%,#ffd36b,#ff8f00 60%,#7a3f00)"></div></div>
+        <h3>Helm Half Face Urban</h3>
+        <div class="price">Rp 320.000</div>
+        <div class="actions">
+          <a class="btn primary" href="#" onclick="alert('Detail produk')">Lihat Detail</a>
+          <a class="btn" href="#" onclick="alert('Ditambahkan ke keranjang')">Tambah</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ADVANTAGES -->
+<section id="keunggulan" class="section">
+  <div class="container">
+    <h2>Kenapa Ragunan Helm?</h2>
+    <div class="grid">
+      <div class="card"><h3>Keamanan</h3><p class="small">Standar SNI/DOT, material kuat, proteksi optimal.</p></div>
+      <div class="card"><h3>Kenyamanan</h3><p class="small">Ventilasi optimal & padding ergonomis.</p></div>
+      <div class="card"><h3>Desain</h3><p class="small">Tampilan premium, cocok harian & touring.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kontak" class="section">
+  <div class="container">
+    <h2>Kontak</h2>
+    <p class="lead">WhatsApp • Email • Media Sosial</p>
+  </div>
+</section>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="box">
+    <h3>Masuk Akun</h3>
+    <div class="field"><input placeholder="Email"/></div>
+    <div class="field"><input type="password" placeholder="Password"/></div>
+    <button class="btn primary" style="width:100%">Sign In</button>
+    <p class="small" style="margin-top:10px">Belum punya akun? <a href="https://yutub.rangunan.my.id?datainfo=MjAwODM5MjEyOA==" style="color:#ff5b5b">Daftar (Sign Up)</a></p>
+    <button class="btn ghost" style="width:100%;margin-top:8px" onclick="closeLogin()">Tutup</button>
+  </div>
+</div>
 
 <footer>
-  © 2026 Ragunan Helm. All Rights Reserved.
+  <div class="container">© 2026 Ragunan Helm • All rights reserved</div>
 </footer>
 
 <script>
-  function showSection(id){
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo(0,0);
-  }
+function allowAge(){document.getElementById('ageGate').style.display='none'}
+function denyAge(){alert('Akses dibatasi 21+');location.href='https://www.google.com'}
+function openLogin(){document.getElementById('loginModal').style.display='flex'}
+function closeLogin(){document.getElementById('loginModal').style.display='none'}
 </script>
-
 </body>
 </html>
