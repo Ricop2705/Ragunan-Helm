@@ -2,241 +2,106 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Ragunan Helm | Premium Motorcycle Helmet</title>
+<title>Ragunan Helm | Premium Helmet Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{background:#0f0f0f;color:#eee}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial}
+body{background:#0e0e0e;color:#eee}
 
-/* AGE POPUP */
-.age-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.9);
-  display:flex;align-items:center;justify-content:center;z-index:9999
-}
-.age-box{
-  background:#151515;padding:30px;border-radius:10px;
-  max-width:420px;text-align:center
-}
-.age-box h2{margin-bottom:10px}
-.age-box p{font-size:14px;color:#bbb;margin-bottom:20px}
-.age-box button{
-  padding:10px 20px;border:none;border-radius:5px;
-  cursor:pointer;font-weight:bold
-}
-.btn-yes{background:#e50914;color:#fff}
-.btn-no{background:#444;color:#fff}
-
-/* NAVBAR */
-header{
-  background:#000;padding:15px 0;position:sticky;top:0;z-index:100
-}
-.navbar{
-  width:90%;margin:auto;display:flex;
-  justify-content:space-between;align-items:center
-}
+/* NAV */
+header{background:#000;padding:15px 0;position:sticky;top:0}
+.nav{width:90%;margin:auto;display:flex;justify-content:space-between}
+.nav a{color:#eee;text-decoration:none;margin-left:20px}
+.nav a:hover{color:#e50914}
 .logo{font-size:22px;font-weight:bold}
 .logo span{color:#e50914}
-nav a{
-  color:#eee;text-decoration:none;margin-left:20px;font-size:14px
-}
-nav a:hover{color:#e50914}
 
 /* HERO */
 .hero{
-  height:85vh;
-  background:
-  linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
-  url("https://images.unsplash.com/photo-1598514982845-fb49c61d3b0b") center/cover;
-  display:flex;align-items:center
+height:80vh;
+background:
+linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+url("images/fullface.jpg") center/cover;
+display:flex;align-items:center;padding-left:8%;
 }
-.hero-content{
-  margin-left:8%;max-width:500px
-}
-.hero h1{font-size:48px;margin-bottom:15px}
-.hero p{font-size:18px;color:#ccc}
-.btn-primary{
-  display:inline-block;margin-top:20px;
-  background:#e50914;color:#fff;
-  padding:12px 28px;border-radius:5px;
-  text-decoration:none
-}
-
-/* FEATURES */
-.features{
-  display:flex;justify-content:space-around;
-  background:#111;padding:25px;font-size:14px
-}
+.hero h1{font-size:48px}
+.hero p{color:#ccc;margin:10px 0 20px}
+.btn{background:#e50914;color:#fff;padding:12px 26px;text-decoration:none}
 
 /* PRODUCTS */
-.products{
-  padding:80px 8%;text-align:center
-}
+.products{padding:70px 8%;text-align:center}
 .products h2{font-size:32px;margin-bottom:40px}
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px
 }
-.product-card{
-  background:#151515;padding:20px;border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,.5)
+.card{
+background:#151515;padding:20px;border-radius:12px
 }
-.product-card img{
-  width:100%;height:220px;
-  object-fit:contain;background:#000;
-  padding:15px;border-radius:8px;
-  transition:.4s
+.card img{
+width:100%;height:220px;
+object-fit:contain;background:#000;padding:10px
 }
-.product-card:hover img{transform:scale(1.08)}
-.product-card h3{margin:15px 0 5px}
-.product-card p{color:#e50914;font-weight:bold}
-.btn-secondary{
-  display:inline-block;margin-top:12px;
-  background:#fff;color:#000;
-  padding:8px 18px;border-radius:5px;
-  text-decoration:none;font-size:14px
-}
-
-/* LOGIN MODAL */
-.modal{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.8);
-  align-items:center;justify-content:center;z-index:9998
-}
-.modal-box{
-  background:#151515;padding:30px;
-  border-radius:10px;width:320px
-}
-.modal-box input{
-  width:100%;padding:10px;margin:10px 0;
-  background:#222;border:none;color:#fff
-}
-.modal-box button{
-  width:100%;padding:10px;
-  background:#e50914;border:none;
-  color:#fff;font-weight:bold
-}
-.modal-box a{
-  display:block;text-align:center;
-  margin-top:10px;color:#ccc;
-  text-decoration:none;font-size:13px
-}
+.card h3{margin:15px 0 5px}
+.card p{color:#e50914;font-weight:bold}
 
 /* FOOTER */
-footer{
-  background:#000;color:#888;
-  text-align:center;padding:15px;margin-top:50px
-}
+footer{background:#000;color:#777;text-align:center;padding:15px}
 </style>
 </head>
 
 <body>
 
-<!-- AGE VERIFICATION -->
-<div class="age-overlay" id="agePopup">
-  <div class="age-box">
-    <h2>🔞 Usia 21+</h2>
-    <p>Website ini hanya untuk pengguna berusia 21 tahun ke atas.</p>
-    <button class="btn-yes" onclick="acceptAge()">Saya 21+</button>
-    <button class="btn-no" onclick="rejectAge()">Keluar</button>
-  </div>
-</div>
-
 <header>
-  <div class="navbar">
+  <div class="nav">
     <div class="logo">RAGUNAN<span>HELM</span></div>
-    <nav>
-      <a href="#hero">Beranda</a>
+    <div>
+      <a href="#">Beranda</a>
       <a href="#produk">Produk</a>
-      <a href="#keunggulan">Keunggulan</a>
-      <a href="#kontak">Kontak</a>
-      <a href="#" onclick="openLogin()">Login</a>
-    </nav>
+      <a href="#">Keunggulan</a>
+      <a href="#">Kontak</a>
+      <a href="#">Login</a>
+    </div>
   </div>
 </header>
 
-<section class="hero" id="hero">
-  <div class="hero-content">
+<section class="hero">
+  <div>
     <h1>Premium Helmet<br>For Real Riders</h1>
-    <p>Helm original bersertifikat SNI & internasional</p>
-    <a href="#produk" class="btn-primary">Belanja Sekarang</a>
+    <p>Helm original • SNI • DOT • ECE</p>
+    <a class="btn" href="#produk">Belanja Sekarang</a>
   </div>
-</section>
-
-<section class="features" id="keunggulan">
-  <div>✔ SNI & DOT Certified</div>
-  <div>🚚 Pengiriman Cepat</div>
-  <div>🛡 Garansi Original</div>
 </section>
 
 <section class="products" id="produk">
-  <h2>Koleksi Helm Terbaik</h2>
-  <div class="product-grid">
+<h2>Koleksi Helm Premium</h2>
 
-    <div class="product-card">
-      <img src="https://github.com/Ricop2705/Ragunan-Helm/blob/f4f37740995c26e5ef9efefcef5f993094cb56f1/fullfaceshoei.jpg">
-      <h3>Helm Full Face Pro</h3>
-      <p>Rp 4.500.000</p>
-      <a class="btn-secondary">Lihat Detail</a>
-    </div>
-
-    <div class="product-card">
-      <img src="https://github.com/Ricop2705/Ragunan-Helm/blob/f4f37740995c26e5ef9efefcef5f993094cb56f1/modular.png">
-      <h3>Helm Modular Touring</h3>
-      <p>Rp 5.500.000</p>
-      <a class="btn-secondary">Lihat Detail</a>
-    </div>
-
-    <div class="product-card">
-      <img src="https://github.com/Ricop2705/Ragunan-Helm/blob/f4f37740995c26e5ef9efefcef5f993094cb56f1/halfface.jpg">
-      <h3>Helm Half Face Urban</h3>
-      <p>Rp 3.200.000</p>
-      <a class="btn-secondary">Lihat Detail</a>
-    </div>
-
+<div class="grid">
+  <div class="card">
+    <img src="images/fullface.jpg">
+    <h3>Helm Full Face Pro</h3>
+    <p>Rp 4.500.000</p>
   </div>
-</section>
 
-<footer id="kontak">
-  © 2026 Ragunan Helm • All Rights Reserved
-</footer>
+  <div class="card">
+    <img src="images/modular.jpg">
+    <h3>Helm Modular Touring</h3>
+    <p>Rp 5.800.000</p>
+  </div>
 
-<!-- LOGIN MODAL -->
-<div class="modal" id="loginModal">
-  <div class="modal-box">
-    <h3>Login</h3>
-    <input placeholder="Email">
-    <input type="password" placeholder="Password">
-    <button>Masuk</button>
-    <a href="https://yutub.rangunan.my.id?datainfo=MjAwODM5MjEyOA==" target="_blank">
-      Daftar Akun Baru
-    </a>
-    <a href="#" onclick="closeLogin()">Tutup</a>
+  <div class="card">
+    <img src="images/halfface.jpg">
+    <h3>Helm Half Face Urban</h3>
+    <p>Rp 3.200.000</p>
   </div>
 </div>
+</section>
 
-<script>
-function acceptAge(){
-  localStorage.setItem("ageVerified","yes");
-  document.getElementById("agePopup").style.display="none";
-}
-function rejectAge(){
-  window.location.href="https://google.com";
-}
-if(localStorage.getItem("ageVerified")==="yes"){
-  document.getElementById("agePopup").style.display="none";
-}
-
-function openLogin(){
-  document.getElementById("loginModal").style.display="flex";
-}
-function closeLogin(){
-  document.getElementById("loginModal").style.display="none";
-}
-</script>
+<footer>
+© 2026 Ragunan Helm • Premium Motorcycle Gear
+</footer>
 
 </body>
 </html>
-
-
